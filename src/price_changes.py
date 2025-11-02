@@ -66,7 +66,7 @@ def identify_price_changes(df, threshold_pct=1.0):
     if len(price_changes_df) > 0:
         print(f"\n  First 10 price changes:")
         for idx, row in price_changes_df.head(10).iterrows():
-            print(f"    {row['date'].date()}: £{row['old_price']:.4f} → £{row['new_price']:.4f} ({row['pct_change']:+.1f}%)")
+            print(f"    {row['date'].date()}: {row['old_price']:.4f} -> {row['new_price']:.4f} ({row['pct_change']:+.1f}%)")
 
     return price_changes_df
 

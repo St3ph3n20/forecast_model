@@ -161,8 +161,8 @@ def main():
     print(f"\n  Top 5 largest changes:")
     top_changes = comparison_df.nlargest(5, 'abs_elasticity_change')
     for _, row in top_changes.iterrows():
-        print(f"    {row['date'].date()}: {row['phase2_elasticity']:+.3f} → {row['phase3_elasticity']:+.3f} "
-              f"(Δ = {row['elasticity_change']:+.3f})")
+        print(f"    {row['date'].date()}: {row['phase2_elasticity']:+.3f} -> {row['phase3_elasticity']:+.3f} "
+              f"(Delta = {row['elasticity_change']:+.3f})")
 
     # ========================================================================
     # 6. EXTRACT SEASONAL COEFFICIENTS
@@ -217,12 +217,12 @@ def main():
     # Save elasticity history
     elasticity_history_path = output_dir / "elasticity_history.csv"
     comparison_df.to_csv(elasticity_history_path, index=False)
-    print(f"\n✓ Elasticity history saved: {elasticity_history_path}")
+    print(f"\n[OK] Elasticity history saved: {elasticity_history_path}")
 
     # Save seasonal coefficients
     seasonal_coefs_path = output_dir / "seasonal_coefficients.csv"
     seasonal_coefs.to_csv(seasonal_coefs_path, index=False)
-    print(f"✓ Seasonal coefficients saved: {seasonal_coefs_path}")
+    print(f"[OK] Seasonal coefficients saved: {seasonal_coefs_path}")
 
     # Generate visualizations
     create_phase3_comparison_chart(comparison_df, output_dir / "phase3_comparison.png")
@@ -256,7 +256,7 @@ def main():
 
         f.write("Largest changes:\n")
         for _, row in top_changes.iterrows():
-            f.write(f"  {row['date'].date()}: {row['phase2_elasticity']:+.3f} → {row['phase3_elasticity']:+.3f} ({row['elasticity_change']:+.3f})\n")
+            f.write(f"  {row['date'].date()}: {row['phase2_elasticity']:+.3f} -> {row['phase3_elasticity']:+.3f} ({row['elasticity_change']:+.3f})\n")
 
         if validation_results:
             f.write("\n")
@@ -289,13 +289,13 @@ def main():
         criteria_pass.append((comparison_df['abs_elasticity_change'] > 0.2).sum() >= 5)
         criteria_pass.append(abs(phase3_weighted - phase2_weighted) > 0.05)
 
-        f.write(f"{'✓' if criteria_pass[0] else '✗'} Phase 3 R² > 40%: {comparison_df['phase3_r_squared'].mean()*100:.1f}%\n")
-        f.write(f"{'✓' if criteria_pass[1] else '✗'} Validation MAPE < 10%: {validation_results['mean_mape'] if validation_results else 'N/A'}%\n")
-        f.write(f"{'✓' if criteria_pass[2] else '✗'} At least 5 elasticities change by >0.2: {(comparison_df['abs_elasticity_change'] > 0.2).sum()}\n")
-        f.write(f"{'✓' if criteria_pass[3] else '✗'} Weighted elasticity differs by >0.05: {abs(phase3_weighted - phase2_weighted):.3f}\n")
+        f.write(f"{'[PASS]' if criteria_pass[0] else '[FAIL]'} Phase 3 R² > 40%: {comparison_df['phase3_r_squared'].mean()*100:.1f}%\n")
+        f.write(f"{'[PASS]' if criteria_pass[1] else '[FAIL]'} Validation MAPE < 10%: {validation_results['mean_mape'] if validation_results else 'N/A'}%\n")
+        f.write(f"{'[PASS]' if criteria_pass[2] else '[FAIL]'} At least 5 elasticities change by >0.2: {(comparison_df['abs_elasticity_change'] > 0.2).sum()}\n")
+        f.write(f"{'[PASS]' if criteria_pass[3] else '[FAIL]'} Weighted elasticity differs by >0.05: {abs(phase3_weighted - phase2_weighted):.3f}\n")
         f.write(f"\nOverall: {'ALL PASS' if all(criteria_pass) else 'SOME FAILURES'}\n")
 
-    print(f"✓ Summary report saved: {summary_path}")
+    print(f"[OK] Summary report saved: {summary_path}")
 
     # ========================================================================
     # 9. FINAL SUMMARY
@@ -304,16 +304,16 @@ def main():
     print("[9] FINAL SUMMARY")
     print("="*80)
 
-    print(f"\n✓ Phase 3 analysis complete!")
+    print(f"\n[OK] Phase 3 analysis complete!")
     print(f"\nSuccess Criteria:")
-    print(f"  {'✓' if criteria_pass[0] else '✗'} Phase 3 R² > 40%")
-    print(f"  {'✓' if criteria_pass[1] else '✗'} Validation MAPE < 10%")
-    print(f"  {'✓' if criteria_pass[2] else '✗'} At least 5 elasticities change by >0.2")
-    print(f"  {'✓' if criteria_pass[3] else '✗'} Weighted elasticity differs by >0.05")
+    print(f"  {'[PASS]' if criteria_pass[0] else '[FAIL]'} Phase 3 R² > 40%")
+    print(f"  {'[PASS]' if criteria_pass[1] else '[FAIL]'} Validation MAPE < 10%")
+    print(f"  {'[PASS]' if criteria_pass[2] else '[FAIL]'} At least 5 elasticities change by >0.2")
+    print(f"  {'[PASS]' if criteria_pass[3] else '[FAIL]'} Weighted elasticity differs by >0.05")
 
     if all(criteria_pass):
         print(f"\n{'='*80}")
-        print("SUCCESS: All criteria passed! ✓")
+        print("SUCCESS: All criteria passed!")
         print('='*80)
     else:
         print(f"\n{'='*80}")

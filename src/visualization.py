@@ -107,7 +107,7 @@ def create_phase3_comparison_chart(comparison_df, output_path='outputs/phase3_co
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    print(f"\n✓ Comparison chart saved: {output_path}")
+    print(f"\n[OK] Comparison chart saved: {output_path}")
 
     return fig
 
@@ -171,7 +171,7 @@ def create_seasonal_coefficients_chart(seasonal_coefs_df, output_path='outputs/s
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    print(f"✓ Seasonal coefficients chart saved: {output_path}")
+    print(f"[OK] Seasonal coefficients chart saved: {output_path}")
 
     return fig
 
@@ -225,6 +225,6 @@ def create_validation_chart(validation_results, output_path='outputs/validation_
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    print(f"✓ Validation chart saved: {output_path}")
+    print(f"[OK] Validation chart saved: {output_path}")
 
     return fig

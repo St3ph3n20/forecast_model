@@ -116,5 +116,5 @@ def validate_data_quality(df):
             print(f"  - {issue}")
         return False
     else:
-        print("\nData quality: All checks passed ✓")
+        print("\nData quality: All checks passed [OK]")
         return True

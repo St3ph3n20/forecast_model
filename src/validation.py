@@ -235,9 +235,9 @@ def validate_seasonal_model(df, price_changes_df, baseline_model_class,
         print(f"    Target: <10%")
 
         if results['mean_mape'] < 10.0:
-            print(f"    Status: ✓ PASS")
+            print(f"    Status: [PASS]")
         else:
-            print(f"    Status: ✗ FAIL")
+            print(f"    Status: [FAIL]")
 
         return results
     else:
